@@ -1,0 +1,82 @@
+[gd_scene load_steps=13 format=3 uid="uid://8koqxwqwfgkd"]
+
+[ext_resource type="Texture2D" uid="uid://doeqstmkv7adn" path="res://addons/Tiny Swords/Tiny Swords (Update 010)/Resources/Resources/M_Spawn.png" id="1_0aur0"]
+[ext_resource type="Script" path="res://misc/life_regen.gd" id="2_04nxp"]
+[ext_resource type="PackedScene" uid="uid://kk3ypoih8bid" path="res://misc/visual_fx/healing_effect.tscn" id="3_dqqth"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hj641"]
+atlas = ExtResource("1_0aur0")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvav6"]
+atlas = ExtResource("1_0aur0")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gu61"]
+atlas = ExtResource("1_0aur0")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5g1a"]
+atlas = ExtResource("1_0aur0")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6cy2"]
+atlas = ExtResource("1_0aur0")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbiwt"]
+atlas = ExtResource("1_0aur0")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hn7pc"]
+atlas = ExtResource("1_0aur0")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y3tc3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hj641")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvav6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gu61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5g1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6cy2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbiwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hn7pc")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_md8b5"]
+radius = 33.0606
+
+[node name="Meat" type="AnimatedSprite2D"]
+z_index = 1
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_y3tc3")
+autoplay = "default"
+offset = Vector2(0, -25)
+script = ExtResource("2_04nxp")
+regenaration_amount = 10
+healing_effect = ExtResource("3_dqqth")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -23)
+shape = SubResource("CircleShape2D_md8b5")

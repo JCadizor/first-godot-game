@@ -1,0 +1,96 @@
+[gd_scene load_steps=15 format=3 uid="uid://dayro68k2l0cx"]
+
+[ext_resource type="Script" path="res://enemies/behaviour/enemy.gd" id="1_3qa0i"]
+[ext_resource type="Script" path="res://enemies/behaviour/FollowPlayer.gd" id="1_kjri1"]
+[ext_resource type="Texture2D" uid="uid://bbiqaqklpi2gv" path="res://addons/Tiny Swords/Tiny Swords (Update 010)/Factions/Knights/Troops/Pawn/Purple/Pawn_Purple.png" id="1_q7geo"]
+[ext_resource type="PackedScene" uid="uid://33cbnwlwdnc2" path="res://misc/Skull.tscn" id="2_qkxmi"]
+[ext_resource type="PackedScene" uid="uid://8koqxwqwfgkd" path="res://misc/meat.tscn" id="3_b6if3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ns8l"]
+atlas = ExtResource("1_q7geo")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fh3v"]
+atlas = ExtResource("1_q7geo")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkfjo"]
+atlas = ExtResource("1_q7geo")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwthy"]
+atlas = ExtResource("1_q7geo")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xvic"]
+atlas = ExtResource("1_q7geo")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1nx4"]
+atlas = ExtResource("1_q7geo")
+region = Rect2(960, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r8u6o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ns8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fh3v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkfjo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwthy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xvic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1nx4")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jnvsb"]
+radius = 16.0
+height = 54.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rgb44"]
+radius = 37.0135
+
+[node name="Pawn" type="CharacterBody2D" groups=["enemies"]]
+motion_mode = 1
+script = ExtResource("1_3qa0i")
+death_prefab = ExtResource("2_qkxmi")
+drop_items_set = Array[PackedScene]([ExtResource("3_b6if3")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_r8u6o")
+animation = &"Run"
+autoplay = "Run"
+frame_progress = 0.89307
+
+[node name="Pawn_collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -24)
+shape = SubResource("CapsuleShape2D_jnvsb")
+
+[node name="FollowPlayer" type="Node2D" parent="."]
+position = Vector2(0, -24)
+script = ExtResource("1_kjri1")
+original_speed = 1.0
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(0, -24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_rgb44")
+debug_color = Color(0.94902, 0.137255, 0.458824, 0)
+
+[node name="DamageSpawn" type="Marker2D" parent="."]
+position = Vector2(0, -53)

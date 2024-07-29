@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctpxbm0bwuwci"]
+
+[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_e4cp2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x028c"]
+size = Vector2(15.7686, 21.8867)
+
+[node name="free movement player" type="CharacterBody2D"]
+scale = Vector2(3.04651, 2.99014)
+script = ExtResource("1_e4cp2")
+SPEED = 6
+movementWeight = 0.115
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.87786
+offset_top = -11.3707
+offset_right = 8.12214
+offset_bottom = 11.6293
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00555, 0.981637)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.02685, 1.05587)
+shape = SubResource("RectangleShape2D_x028c")
+metadata/_edit_group_ = true
